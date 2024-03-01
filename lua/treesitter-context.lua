@@ -222,7 +222,7 @@ function M.enable()
 
   autocmd('DiagnosticChanged', vim.schedule_wrap(update))
 
-  autocmd('BufReadPost', function(args)
+  autocmd({ 'BufRead', 'BufEnter', 'FocusGained', 'WinEnter' }, function(args)
     attached[args.buf] = should_attach(args.buf)
   end)
 
