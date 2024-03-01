@@ -205,7 +205,7 @@ function M.enable()
 
   autocmd(update_events, update)
 
-  autocmd('BufReadPost', function(args)
+  autocmd({ 'BufRead', 'BufEnter', 'FocusGained', 'WinEnter' }, function(args)
     attached[args.buf] = should_attach(args.buf)
   end)
 
