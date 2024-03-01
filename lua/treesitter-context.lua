@@ -116,7 +116,7 @@ function M.enable()
 
   autocmd({ 'WinScrolled', 'BufEnter', 'WinEnter', 'VimResized', 'DiagnosticChanged' }, update)
 
-  autocmd('BufReadPost', function(args)
+  autocmd({ 'BufRead', 'BufEnter', 'FocusGained', 'WinEnter' }, function(args)
     attached[args.buf] = nil
     if not config.on_attach or config.on_attach(args.buf) ~= false then
       attached[args.buf] = true
@@ -171,7 +171,11 @@ local function init()
   api.nvim_set_hl(0, 'TreesitterContext', { link = 'NormalFloat', default = true })
   api.nvim_set_hl(0, 'TreesitterContextLineNumber', { link = 'LineNr', default = true })
   api.nvim_set_hl(0, 'TreesitterContextBottom', { link = 'NONE', default = true })
-  api.nvim_set_hl(0, 'TreesitterContextLineNumberBottom', { link = 'TreesitterContextBottom', default = true })
+  api.nvim_set_hl(
+    0,
+    'TreesitterContextLineNumberBottom',
+    { link = 'TreesitterContextBottom', default = true }
+  )
   api.nvim_set_hl(0, 'TreesitterContextSeparator', { link = 'FloatBorder', default = true })
 end
 
